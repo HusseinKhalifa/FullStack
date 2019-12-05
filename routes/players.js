@@ -43,5 +43,70 @@ router.post('/', async(req, res) => {
       })
     }
   })
+  router.get('/:id', (req, res)=> {
+    res.send('Show Player' + req.params.id)
+  })
+
+router.get('/:id/edit', async (req, res) => {
+  try {
+    const player = await Player.findById(req.params.id)
+    res.render('players/edit', { player: player })
+  } catch {
+    res.redirect('/players')
+  }
+})
+
+router.put('/:id', async (req, res) => {
+  let player
+  try {
+    player = await Player.findById(req.params.id)
+  //  player.name = req.body.name
+    player.name= req.body.name,
+    player.rank= req.body.rank,
+    player.score= req.body.score,
+    player.time= req.body.time,
+    player.game= req.body.game,
+    player.available= req.body.available
+    await player.save()
+    res.redirect(`/players/${player.id}`)
+  } catch {
+    if (player == null) {
+      res.redirect('/')
+    } else {
+      res.render('players/edit', {
+        player: player,
+        errorMessage: 'Error updating Player'
+      })
+    }
+  }
+})
+
+router.delete('/:id', async (req, res) => {
+  let player
+  try {
+    player = await Player.findById(req.params.id)
+    await player.remove()
+    res.redirect('/players')
+  } catch {
+    if (player == null) {
+      res.redirect('/')
+    } else {
+      res.redirect(`/players/${player.id}`)
+    }
+  }
+})
+
+/*
+  router.get('/:id/edit', (req, res)=> {
+    res.send('Edit Player' + req.params.id)
+  })
   
+  router.put('/:id/edit', (req, res)=> {
+    res.send('Update Player' + req.params.id)
+  })
+ 
+  router.delete('/:id/', (req, res)=> {
+    res.send('Delete Player' + req.params.id)
+  })
+  */
   module.exports = router

@@ -7,4 +7,8 @@
 <br>
 <% players.forEach(player => { %>
   <div><%= player.name %></div>
-<% }) %>
+  <a href="/players/<%= player.id %>">View</a>"
+  <a href="/players/<%= player.id %>/edit">Edit</a>"
+  <%- include('../partials/deleteForm',
+              { url: `/players/${player.id}` }) %>
+ <% }) %>

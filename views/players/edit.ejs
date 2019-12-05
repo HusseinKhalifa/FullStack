@@ -1,0 +1,6 @@
+<h2>Edit Player</h2>
+<form action="/players/<%= player.id %>?_method=PUT" method="POST">
+  <%- include('_form_fields') %>
+  <a href="/players/<%= player.id %>">Cancel</a>
+  <button type="submit">Update</button>
+</form>
