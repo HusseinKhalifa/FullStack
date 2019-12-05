@@ -5,10 +5,30 @@
   <button type="submit">Search</button>
 </form>
 <br>
-<% players.forEach(player => { %>
-  <div><%= player.name %></div>
-  <a href="/players/<%= player.id %>">View</a>"
-  <a href="/players/<%= player.id %>/edit">Edit</a>"
-  <%- include('../partials/deleteForm',
-              { url: `/players/${player.id}` }) %>
- <% }) %>
+<table>
+  <tr>
+    <th>Player</th>
+    <th>Rank</th>
+    <th>Score</th>
+    <th>Time</th>
+    <th>Game Played</th>
+    <th>Status</th>
+  </tr>
+
+  <% players.forEach(player => { %>
+  <tr>
+    <td><%= player.name %></td>
+    <td><%= player.rank %></td>
+    <td><%= player.score %></td>
+    <td><%= player.time %></td>
+    <td><%= player.game %></td>
+    <td><%= player.status %></td>
+
+    
+    <td><a href="/players/<%= player.id %>/edit">Edit</a></td>
+    <td> <%- include('../partials/deleteForm',
+              { url: `/players/${player.id}` }) %></td>
+  </tr>
+  <% }) %>
+</table>
+

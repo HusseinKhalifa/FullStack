@@ -6,7 +6,7 @@ const PlayerSchema = mongoose.Schema({
     score: {type: Number, required: false },
     time: { type: String, required: false },
     game: { type: String, required: false },
-    available: { type: Boolean , required: false}
+    status: { type: String, required: false}
   });
   
 const Player = mongoose.model('Player', PlayerSchema);

@@ -29,7 +29,7 @@ router.post('/', async(req, res) => {
         score: req.body.score,
         time: req.body.time,
         game: req.body.game,
-        available: req.body.available
+        status: req.body.status
 
     })
     try {
@@ -66,9 +66,10 @@ router.put('/:id', async (req, res) => {
     player.score= req.body.score,
     player.time= req.body.time,
     player.game= req.body.game,
-    player.available= req.body.available
+    player.status= req.body.status
     await player.save()
-    res.redirect(`/players/${player.id}`)
+    res.redirect(`/players`)
+    //res.redirect(`/players/${player.id}`)
   } catch {
     if (player == null) {
       res.redirect('/')
